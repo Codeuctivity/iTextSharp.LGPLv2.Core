@@ -21,7 +21,7 @@ dotnet_csproj:
   patch: true
   file: '**\*.csproj'
   version: "{version}"
-  package_version: "{version}-prerelease"
+  package_version: "{version}"
   assembly_version: "{version}"
   file_version: "{version}"
   informational_version: "{version}"
@@ -30,7 +30,6 @@ artifacts:
   - path: '**\iTextSharp.LGPLv2.Core.*.nupkg'
 deploy:
   - provider: GitHub
-    prerelease: true
     auth_token:
       secure: 1u8+Vw3eV9Wv45b7FC5FYAlO7xn6X6ov27BPDHx7hh3B4+E3UsE017aYq1WZbQvN
   - provider: NuGet
