@@ -1,5 +1,7 @@
 iTextSharp.LGPLv2.Core.StrongName
-======================
+=================================
+
+[![Build status](https://ci.appveyor.com/api/projects/status/51cyuj418row2mb5/branch/master?svg=true)](https://ci.appveyor.com/project/stesee/itextsharp-lgplv2-core/branch/master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/17cafdf1d9354b95821b970a303120ce)](https://www.codacy.com/gh/Codeuctivity/iTextSharp.LGPLv2.Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Codeuctivity/iTextSharp.LGPLv2.Core&amp;utm_campaign=Badge_Grade)
 
 `iTextSharp.LGPLv2.Core` is an **unofficial** port of the last [LGPL version](http://www.gnu.org/licenses/old-licenses/lgpl-2.0-standalone.html) of the [iTextSharp (V4.1.6)](https://github.com/itextsharper/iTextSharp-4.1.6) to .NET Core.
 

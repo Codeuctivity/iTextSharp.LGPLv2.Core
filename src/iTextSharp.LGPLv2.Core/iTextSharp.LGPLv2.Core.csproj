@@ -1,24 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description> iTextSharp.LGPLv2.Core is an unofficial port of the last LGPL version of the iTextSharp (V4.1.6) to .NET Core.</Description>
     <LangVersion>latest</LangVersion>
-    <Authors>Codeuctivity</Authors>
+    <Authors>Stefan Seeland</Authors>
+    <Company>Codeuctivity</Company>
+    <AssemblyTitle>iTextSharp.LGPLv2.Core.StrongName</AssemblyTitle>
+    <Product>iTextSharp.LGPLv2.Core.StrongName</Product>
+    <AssemblyName>iTextSharp.LGPLv2.Core.StrongName</AssemblyName>
+    <PackageId>iTextSharp.LGPLv2.Core.StrongName</PackageId>
+    <Description> iTextSharp.LGPLv2.Core is an unofficial port of the last LGPL version of the iTextSharp (V4.1.6) to .NET Core.</Description>
     <TargetFrameworks>net40;netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0</TargetFrameworks>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>iTextSharp.LGPLv2.Core.StrongName</AssemblyName>
-    <PackageId>iTextSharp.LGPLv2.Core.StrongName</PackageId>
     <PackageTags>PdfReport;Excel;Export;iTextSharp;PDF;Report;Reporting;Persian;.NET Core;aspnetcore</PackageTags>
     <PackageIcon>NugetIcon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/Codeuctivity/iTextSharp.LGPLv2.Core</PackageProjectUrl>
     <PackageLicenseExpression>LGPL-2.0-only</PackageLicenseExpression>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <AssemblyOriginatorKeyFile>iTextSharp.LGPLv2.Core.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <IncludeSymbols>true</IncludeSymbols>
@@ -54,5 +52,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="NugetIcon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>
