@@ -1,11 +1,5 @@
-iTextSharp.LGPLv2.Core
+iTextSharp.LGPLv2.Core.StrongName
 ======================
-
-<p align="left">
-  <a href="https://github.com/VahidN/iTextSharp.LGPLv2.Core">
-     <img alt="GitHub Actions status" src="https://github.com/VahidN/iTextSharp.LGPLv2.Core/workflows/.NET%20Core%20Build/badge.svg">
-  </a>
-</p>
 
 `iTextSharp.LGPLv2.Core` is an **unofficial** port of the last [LGPL version](http://www.gnu.org/licenses/old-licenses/lgpl-2.0-standalone.html) of the [iTextSharp (V4.1.6)](https://github.com/itextsharper/iTextSharp-4.1.6) to .NET Core.
 
@@ -14,12 +8,12 @@ Install via NuGet
 -----------------
 To install iTextSharp.LGPLv2.Core, run the following command in the Package Manager Console:
 
-[![Nuget](https://img.shields.io/nuget/v/iTextSharp.LGPLv2.Core)](https://github.com/VahidN/iTextSharp.LGPLv2.Core)
+[![Nuget](https://img.shields.io/nuget/v/iTextSharp.LGPLv2.Core.StrongName)](https://github.com/Codeuctivity/iTextSharp.LGPLv2.Core)
 ```
-PM> Install-Package iTextSharp.LGPLv2.Core
+PM> Install-Package iTextSharp.LGPLv2.Core.StrongName
 ```
 
-You can also view the [package page](http://www.nuget.org/packages/iTextSharp.LGPLv2.Core/) on NuGet.
+You can also view the [package page](http://www.nuget.org/packages/iTextSharp.LGPLv2.Core.StrongName/) on NuGet.
 
 
 Usage
@@ -31,7 +25,7 @@ FAQ
 -----------------
  > The pdf is created, but when I try to view it, it says that the document is in use by another process.
 
- You should dispose the FileStream/MemoryStream [explicitly](https://github.com/VahidN/iTextSharp.LGPLv2.Core/blob/master/src/iTextSharp.LGPLv2.Core.FunctionalTests/iTextExamples/Chapter11Tests.cs#L69). It won't be closed and disposed automatically at the end.
+ You should dispose the FileStream/MemoryStream [explicitly](https://github.com/Codeuctivity/iTextSharp.LGPLv2.Core/blob/master/src/iTextSharp.LGPLv2.Core.FunctionalTests/iTextExamples/Chapter11Tests.cs#L69). It won't be closed and disposed automatically at the end.
 
  > I can't find what would be the equivalent of the PdfTextExtractor class.
 
@@ -39,7 +33,7 @@ FAQ
 
  > It can't display Unicode characters.
 
- You can find more samples about how to define and use Unicode fonts [here](https://github.com/VahidN/iTextSharp.LGPLv2.Core/blob/master/src/iTextSharp.LGPLv2.Core.FunctionalTests/iTextExamples/Chapter11Tests.cs).
+ You can find more samples about how to define and use Unicode fonts [here](https://github.com/Codeuctivity/iTextSharp.LGPLv2.Core/blob/master/src/iTextSharp.LGPLv2.Core.FunctionalTests/iTextExamples/Chapter11Tests.cs).
 
  > Table rowspans don't work correctly.
 
@@ -47,7 +41,7 @@ FAQ
 
  > iTextSharp.text.html.simpleparser.HTMLWorker does not exist.
 
- It has been renamed to [HtmlWorker](https://github.com/VahidN/iTextSharp.LGPLv2.Core/blob/master/src/iTextSharp.LGPLv2.Core.FunctionalTests/HtmlWorkerTests.cs#L42).
+ It has been renamed to [HtmlWorker](https://github.com/Codeuctivity/iTextSharp.LGPLv2.Core/blob/master/src/iTextSharp.LGPLv2.Core.FunctionalTests/HtmlWorkerTests.cs#L42).
 
 Note
 -----------------

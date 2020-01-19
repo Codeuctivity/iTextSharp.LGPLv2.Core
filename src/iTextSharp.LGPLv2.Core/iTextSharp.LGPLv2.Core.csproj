@@ -3,16 +3,16 @@
     <Description> iTextSharp.LGPLv2.Core is an unofficial port of the last LGPL version of the iTextSharp (V4.1.6) to .NET Core.</Description>
     <VersionPrefix>1.6.1</VersionPrefix>
     <LangVersion>latest</LangVersion>
-    <Authors>Vahid Nasiri</Authors>
+    <Authors>Codeuctivity</Authors>
     <TargetFrameworks>net40;netstandard1.3;netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3;netstandard2.0</TargetFrameworks>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>iTextSharp.LGPLv2.Core</AssemblyName>
-    <PackageId>iTextSharp.LGPLv2.Core</PackageId>
+    <AssemblyName>iTextSharp.LGPLv2.Core.StrongName</AssemblyName>
+    <PackageId>iTextSharp.LGPLv2.Core.StrongName</PackageId>
     <PackageTags>PdfReport;Excel;Export;iTextSharp;PDF;Report;Reporting;Persian;.NET Core;aspnetcore</PackageTags>
-    <PackageProjectUrl>https://github.com/VahidN/iTextSharp.LGPLv2.Core</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.gnu.org/licenses/old-licenses/lgpl-2.0-standalone.html</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Codeuctivity/iTextSharp.LGPLv2.Core</PackageProjectUrl>
+    <PackageLicenseExpression>LGPL-2.0-only</PackageLicenseExpression>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.3' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.1</NetStandardImplicitPackageVersion>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
