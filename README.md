@@ -47,7 +47,7 @@ To run this project on non-Windows-based operating systems, you will need to ins
   - yum install freetype-devel fontconfig libXft-devel
   - yum install libjpeg-turbo-devel libpng-devel giflib-devel libtiff-devel libexif-devel
   - yum install glib2-devel cairo-devel
-  - git clone https://github.com/mono/libgdiplus
+  - git clone <https://github.com/mono/libgdiplus>
   - cd libgdiplus
   - ./autogen.sh
   - make
