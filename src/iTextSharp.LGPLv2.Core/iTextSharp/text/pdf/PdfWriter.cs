@@ -1,14 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Collections;
-using System.util.collections;
-using System.util;
+﻿using iTextSharp.text.pdf.collection;
 using iTextSharp.text.pdf.events;
 using iTextSharp.text.pdf.interfaces;
 using iTextSharp.text.pdf.intern;
-using iTextSharp.text.pdf.collection;
 using iTextSharp.text.xml.xmp;
 using Org.BouncyCastle.X509;
+using System;
+using System.Collections;
+using System.IO;
+using System.util;
+using System.util.collections;
 
 namespace iTextSharp.text.pdf
 {
@@ -29,7 +29,6 @@ namespace iTextSharp.text.pdf
         IPdfRunDirection,
         IPdfAnnotations
     {
-
         /// <summary>
         /// The operation permitted when the document is opened with the user password
         /// @since 2.0.7
@@ -760,13 +759,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public float CurrentPageHeight => Pdf.CurrentHeight;
 
-        public PdfAcroForm AcroForm
-        {
-            get
-            {
-                return Pdf.AcroForm;
-            }
-        }
+        public PdfAcroForm AcroForm => Pdf.AcroForm;
 
         /// <summary>
         /// [C7] portable collections
@@ -792,14 +785,15 @@ namespace iTextSharp.text.pdf
             set
             {
                 if (compressionLevel < PdfStream.NO_COMPRESSION || compressionLevel > PdfStream.BEST_COMPRESSION)
+                {
                     compressionLevel = PdfStream.DEFAULT_COMPRESSION;
+                }
                 else
+                {
                     compressionLevel = value;
+                }
             }
-            get
-            {
-                return compressionLevel;
-            }
+            get => compressionLevel;
         }
 
         /// <summary>
@@ -809,10 +803,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public virtual Rectangle CropBoxSize
         {
-            set
-            {
-                Pdf.CropBoxSize = value;
-            }
+            set => Pdf.CropBoxSize = value;
         }
 
         /// <summary>
@@ -823,21 +814,9 @@ namespace iTextSharp.text.pdf
         /// and an idea of the current size is needed.
         /// </summary>
         /// <returns>the approximate size without fonts or templates</returns>
-        public int CurrentDocumentSize
-        {
-            get
-            {
-                return Body.Offset + Body.Size * 20 + 0x48;
-            }
-        }
+        public int CurrentDocumentSize => Body.Offset + Body.Size * 20 + 0x48;
 
-        public virtual int CurrentPageNumber
-        {
-            get
-            {
-                return currentPageNumber;
-            }
-        }
+        public virtual int CurrentPageNumber => currentPageNumber;
 
         /// <summary>
         /// [M1] Color settings
@@ -846,13 +825,7 @@ namespace iTextSharp.text.pdf
         /// Gets the default colorspaces.
         /// </summary>
         /// <returns>the default colorspaces</returns>
-        public PdfDictionary DefaultColorspace
-        {
-            get
-            {
-                return defaultColorspace;
-            }
-        }
+        public PdfDictionary DefaultColorspace => defaultColorspace;
 
         /// <summary>
         /// the PdfDirectContentByte instances
@@ -868,7 +841,10 @@ namespace iTextSharp.text.pdf
             get
             {
                 if (!open)
+                {
                     throw new Exception("The document is not open.");
+                }
+
                 return directContent;
             }
         }
@@ -884,7 +860,10 @@ namespace iTextSharp.text.pdf
             get
             {
                 if (!open)
+                {
                     throw new Exception("The document is not open.");
+                }
+
                 return directContentUnder;
             }
         }
@@ -894,10 +873,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public virtual int Duration
         {
-            set
-            {
-                Pdf.Duration = value;
-            }
+            set => Pdf.Duration = value;
         }
 
         /// <summary>
@@ -909,7 +885,10 @@ namespace iTextSharp.text.pdf
             get
             {
                 if (extraCatalog == null)
+                {
                     extraCatalog = new PdfDictionary();
+                }
+
                 return extraCatalog;
             }
         }
@@ -921,27 +900,15 @@ namespace iTextSharp.text.pdf
         /// Gets the 1.5 compression status.
         /// </summary>
         /// <returns> true  if the 1.5 compression is on</returns>
-        public bool FullCompression
-        {
-            get
-            {
-                return fullCompression;
-            }
-        }
+        public bool FullCompression => fullCompression;
 
         /// <summary>
         /// [U5] Transparency groups
         /// </summary>
         public PdfDictionary Group
         {
-            get
-            {
-                return group;
-            }
-            set
-            {
-                group = value;
-            }
+            get => group;
+            set => group = value;
         }
 
         /// <summary>
@@ -949,13 +916,7 @@ namespace iTextSharp.text.pdf
         /// change it directly (add keys and values to the info dictionary).
         /// </summary>
         /// <returns>the info dictionary</returns>
-        public PdfDictionary Info
-        {
-            get
-            {
-                return ((PdfDocument)Document).Info;
-            }
-        }
+        public PdfDictionary Info => ((PdfDocument)Document).Info;
 
         /// <summary>
         /// Gets the <B>Optional Content Properties Dictionary</B>. Each call fills the dictionary with the current layer
@@ -978,10 +939,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public ArrayList Outlines
         {
-            set
-            {
-                NewBookmarks = value;
-            }
+            set => NewBookmarks = value;
         }
 
         /// <summary>
@@ -989,10 +947,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public bool PageEmpty
         {
-            set
-            {
-                Pdf.PageEmpty = value;
-            }
+            set => Pdf.PageEmpty = value;
         }
 
         /// <summary>
@@ -1009,18 +964,24 @@ namespace iTextSharp.text.pdf
         /// <returns>the  PdfPageEvent  for this document or  null </returns>
         public IPdfPageEvent PageEvent
         {
-            get
-            {
-                return _pageEvent;
-            }
+            get => _pageEvent;
             set
             {
-                if (value == null) _pageEvent = null;
-                else if (_pageEvent == null) _pageEvent = value;
-                else if (_pageEvent is PdfPageEventForwarder) ((PdfPageEventForwarder)_pageEvent).AddPageEvent(value);
+                if (value == null)
+                {
+                    _pageEvent = null;
+                }
+                else if (_pageEvent == null)
+                {
+                    _pageEvent = value;
+                }
+                else if (_pageEvent is PdfPageEventForwarder)
+                {
+                    ((PdfPageEventForwarder)_pageEvent).AddPageEvent(value);
+                }
                 else
                 {
-                    PdfPageEventForwarder forward = new PdfPageEventForwarder();
+                    var forward = new PdfPageEventForwarder();
                     forward.AddPageEvent(_pageEvent);
                     forward.AddPageEvent(value);
                     _pageEvent = forward;
@@ -1033,10 +994,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public virtual PdfPageLabels PageLabels
         {
-            set
-            {
-                Pdf.PageLabels = value;
-            }
+            set => Pdf.PageLabels = value;
         }
 
         /// <summary>
@@ -1045,35 +1003,20 @@ namespace iTextSharp.text.pdf
         /// if you have (re)set the page number previously.
         /// </summary>
         /// <returns>a page number</returns>
-        public int PageNumber
-        {
-            get
-            {
-                return Pdf.PageNumber;
-            }
-        }
+        public int PageNumber => Pdf.PageNumber;
 
         /// <summary>
         /// Gives the size of the media box.
         /// </summary>
         /// <returns>a Rectangle</returns>
-        public new Rectangle PageSize
-        {
-            get
-            {
-                return Pdf.PageSize;
-            }
-        }
+        public new Rectangle PageSize => Pdf.PageSize;
 
         /// <summary>
         /// Use this method to set the XMP Metadata for each page.
         /// </summary>
         public byte[] PageXmpMetadata
         {
-            set
-            {
-                Pdf.XmpMetadata = value;
-            }
+            set => Pdf.XmpMetadata = value;
         }
 
         /// <summary>
@@ -1081,23 +1024,14 @@ namespace iTextSharp.text.pdf
         /// will be created in the future.
         /// </summary>
         /// <returns>the  PdfIndirectReference </returns>
-        public PdfIndirectReference PdfIndirectReference
-        {
-            get
-            {
-                return Body.PdfIndirectReference;
-            }
-        }
+        public PdfIndirectReference PdfIndirectReference => Body.PdfIndirectReference;
 
         /// <summary>
         /// @see com.lowagie.text.pdf.interfaces.PdfVersion#setPdfVersion(char)
         /// </summary>
         public virtual char PdfVersion
         {
-            set
-            {
-                pdf_version.PdfVersion = value;
-            }
+            set => pdf_version.PdfVersion = value;
         }
 
         /// <summary>
@@ -1109,21 +1043,32 @@ namespace iTextSharp.text.pdf
             set
             {
                 if (_pdfxConformance.PdfxConformance == value)
+                {
                     return;
+                }
+
                 if (Pdf.IsOpen())
+                {
                     throw new PdfXConformanceException("PDFX conformance can only be set before opening the document.");
+                }
+
                 if (Crypto != null)
+                {
                     throw new PdfXConformanceException("A PDFX conforming document cannot be encrypted.");
+                }
+
                 if (value == PDFA1A || value == PDFA1B)
+                {
                     PdfVersion = VERSION_1_4;
+                }
                 else if (value != PDFXNONE)
+                {
                     PdfVersion = VERSION_1_3;
+                }
+
                 _pdfxConformance.PdfxConformance = value;
             }
-            get
-            {
-                return _pdfxConformance.PdfxConformance;
-            }
+            get => _pdfxConformance.PdfxConformance;
         }
 
         /// <summary>
@@ -1136,14 +1081,8 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public bool RgbTransparencyBlending
         {
-            get
-            {
-                return _rgbTransparencyBlending;
-            }
-            set
-            {
-                _rgbTransparencyBlending = value;
-            }
+            get => _rgbTransparencyBlending;
+            set => _rgbTransparencyBlending = value;
         }
 
         /// <summary>
@@ -1151,13 +1090,7 @@ namespace iTextSharp.text.pdf
         /// and construct bookmarks.
         /// </summary>
         /// <returns>the root outline</returns>
-        public PdfOutline RootOutline
-        {
-            get
-            {
-                return directContent.RootOutline;
-            }
-        }
+        public PdfOutline RootOutline => directContent.RootOutline;
 
         /// <summary>
         /// Sets the run direction. This is only used as a placeholder
@@ -1168,13 +1101,13 @@ namespace iTextSharp.text.pdf
             set
             {
                 if (value < RUN_DIRECTION_NO_BIDI || value > RUN_DIRECTION_RTL)
+                {
                     throw new Exception("Invalid run direction: " + value);
+                }
+
                 runDirection = value;
             }
-            get
-            {
-                return runDirection;
-            }
+            get => runDirection;
         }
 
         /// <summary>
@@ -1182,10 +1115,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public virtual int SigFlags
         {
-            set
-            {
-                Pdf.SigFlags = value;
-            }
+            set => Pdf.SigFlags = value;
         }
 
         /// <summary>
@@ -1200,14 +1130,15 @@ namespace iTextSharp.text.pdf
             set
             {
                 if (value < 0.001f)
+                {
                     _spaceCharRatio = 0.001f;
+                }
                 else
+                {
                     _spaceCharRatio = value;
+                }
             }
-            get
-            {
-                return _spaceCharRatio;
-            }
+            get => _spaceCharRatio;
         }
 
         /// <summary>
@@ -1215,14 +1146,8 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public bool StrictImageSequence
         {
-            set
-            {
-                Pdf.StrictImageSequence = value;
-            }
-            get
-            {
-                return Pdf.StrictImageSequence;
-            }
+            set => Pdf.StrictImageSequence = value;
+            get => Pdf.StrictImageSequence;
         }
 
         /// <summary>
@@ -1234,7 +1159,10 @@ namespace iTextSharp.text.pdf
             get
             {
                 if (Tagged && structureTreeRoot == null)
+                {
                     structureTreeRoot = new PdfStructureTreeRoot(this);
+                }
+
                 return structureTreeRoot;
             }
         }
@@ -1247,14 +1175,8 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public PdfName Tabs
         {
-            get
-            {
-                return tabs;
-            }
-            set
-            {
-                tabs = value;
-            }
+            get => tabs;
+            set => tabs = value;
         }
 
         /// <summary>
@@ -1264,10 +1186,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public virtual Image Thumbnail
         {
-            set
-            {
-                Pdf.Thumbnail = value;
-            }
+            set => Pdf.Thumbnail = value;
         }
 
         /// <summary>
@@ -1275,10 +1194,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public virtual PdfTransition Transition
         {
-            set
-            {
-                Pdf.Transition = value;
-            }
+            set => Pdf.Transition = value;
         }
 
         /// <summary>
@@ -1286,14 +1202,8 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public bool UserProperties
         {
-            set
-            {
-                _userProperties = value;
-            }
-            get
-            {
-                return _userProperties;
-            }
+            set => _userProperties = value;
+            get => _userProperties;
         }
 
         /// <summary>
@@ -1310,13 +1220,14 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public float Userunit
         {
-            get
-            {
-                return userunit;
-            }
+            get => userunit;
             set
             {
-                if (value < 1f || value > 75000f) throw new DocumentException("UserUnit should be a value between 1 and 75000.");
+                if (value < 1f || value > 75000f)
+                {
+                    throw new DocumentException("UserUnit should be a value between 1 and 75000.");
+                }
+
                 userunit = value;
                 SetAtLeastPdfVersion(VERSION_1_6);
             }
@@ -1328,10 +1239,7 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public virtual int ViewerPreferences
         {
-            set
-            {
-                Pdf.ViewerPreferences = value;
-            }
+            set => Pdf.ViewerPreferences = value;
         }
 
         /// <summary>
@@ -1342,82 +1250,46 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public byte[] XmpMetadata
         {
-            set
-            {
-                xmpMetadata = value;
-            }
-            get
-            {
-                return xmpMetadata;
-            }
+            set => xmpMetadata = value;
+            get => xmpMetadata;
         }
 
-        internal virtual PdfIndirectReference CurrentPage
-        {
-            get
-            {
-                return GetPageReference(currentPageNumber);
-            }
-        }
+        internal virtual PdfIndirectReference CurrentPage => GetPageReference(currentPageNumber);
 
         /// <summary>
         /// PDF Objects that have an impact on the PDF body
         /// </summary>
-        internal PdfEncryption Encryption
-        {
-            get
-            {
-                return Crypto;
-            }
-        }
+        internal PdfEncryption Encryption => Crypto;
 
-        internal int IndirectReferenceNumber
-        {
-            get
-            {
-                return Body.IndirectReferenceNumber;
-            }
-        }
+        internal int IndirectReferenceNumber => Body.IndirectReferenceNumber;
 
         /// <summary>
         /// Returns the outputStreamCounter.
         /// </summary>
         /// <returns>the outputStreamCounter</returns>
-        internal new OutputStreamCounter Os
-        {
-            get
-            {
-                return base.Os;
-            }
-        }
+        internal new OutputStreamCounter Os => base.Os;
 
         /// <summary>
         /// Gets the  PdfDocument  associated with this writer.
         /// </summary>
         /// <returns>the  PdfDocument </returns>
-        internal PdfDocument PdfDocument
-        {
-            get
-            {
-                return Pdf;
-            }
-        }
+        internal PdfDocument PdfDocument => Pdf;
 
         public static PdfWriter GetInstance(Document document, Stream os)
         {
-            PdfDocument pdf = new PdfDocument();
+            var pdf = new PdfDocument();
             document.AddDocListener(pdf);
-            PdfWriter writer = new PdfWriter(pdf, os);
+            var writer = new PdfWriter(pdf, os);
             pdf.AddWriter(writer);
             return writer;
         }
 
         public static PdfWriter GetInstance(Document document, Stream os, IDocListener listener)
         {
-            PdfDocument pdf = new PdfDocument();
+            var pdf = new PdfDocument();
             pdf.AddDocListener(listener);
             document.AddDocListener(pdf);
-            PdfWriter writer = new PdfWriter(pdf, os);
+            var writer = new PdfWriter(pdf, os);
             pdf.AddWriter(writer);
             return writer;
         }
@@ -1498,55 +1370,61 @@ namespace iTextSharp.text.pdf
                     name = new PdfName("img" + _images.Count);
                     if (image is ImgWmf)
                     {
-                        ImgWmf wmf = (ImgWmf)image;
+                        var wmf = (ImgWmf)image;
                         wmf.ReadWmf(PdfTemplate.CreateTemplate(this, 0, 0));
                     }
                 }
                 else
                 {
-                    PdfIndirectReference dref = image.DirectReference;
+                    var dref = image.DirectReference;
                     if (dref != null)
                     {
-                        PdfName rname = new PdfName("img" + _images.Count);
+                        var rname = new PdfName("img" + _images.Count);
                         _images[image.MySerialId] = rname;
                         ImageDictionary.Put(rname, dref);
                         return rname;
                     }
-                    Image maskImage = image.ImageMask;
+                    var maskImage = image.ImageMask;
                     PdfIndirectReference maskRef = null;
                     if (maskImage != null)
                     {
-                        PdfName mname = (PdfName)_images[maskImage.MySerialId];
+                        var mname = (PdfName)_images[maskImage.MySerialId];
                         maskRef = GetImageReference(mname);
                     }
-                    PdfImage i = new PdfImage(image, "img" + _images.Count, maskRef);
+                    var i = new PdfImage(image, "img" + _images.Count, maskRef);
                     if (image is ImgJbig2)
                     {
-                        byte[] globals = ((ImgJbig2)image).GlobalBytes;
+                        var globals = ((ImgJbig2)image).GlobalBytes;
                         if (globals != null)
                         {
-                            PdfDictionary decodeparms = new PdfDictionary();
+                            var decodeparms = new PdfDictionary();
                             decodeparms.Put(PdfName.Jbig2Globals, GetReferenceJbig2Globals(globals));
                             i.Put(PdfName.Decodeparms, decodeparms);
                         }
                     }
                     if (image.HasIccProfile())
                     {
-                        PdfIccBased icc = new PdfIccBased(image.TagIcc, image.CompressionLevel);
-                        PdfIndirectReference iccRef = Add(icc);
-                        PdfArray iccArray = new PdfArray();
+                        var icc = new PdfIccBased(image.TagIcc, image.CompressionLevel);
+                        var iccRef = Add(icc);
+                        var iccArray = new PdfArray();
                         iccArray.Add(PdfName.Iccbased);
                         iccArray.Add(iccRef);
-                        PdfArray colorspace = i.GetAsArray(PdfName.Colorspace);
+                        var colorspace = i.GetAsArray(PdfName.Colorspace);
                         if (colorspace != null)
                         {
                             if (colorspace.Size > 1 && PdfName.Indexed.Equals(colorspace[0]))
+                            {
                                 colorspace[1] = iccArray;
+                            }
                             else
+                            {
                                 i.Put(PdfName.Colorspace, iccArray);
+                            }
                         }
                         else
+                        {
                             i.Put(PdfName.Colorspace, iccArray);
+                        }
                     }
                     Add(i, fixedRef);
                     name = i.Name;
@@ -1674,15 +1552,20 @@ namespace iTextSharp.text.pdf
         /// <param name="group">the radio group</param>
         public void AddOcgRadioGroup(ArrayList group)
         {
-            PdfArray ar = new PdfArray();
-            for (int k = 0; k < group.Count; ++k)
+            var ar = new PdfArray();
+            for (var k = 0; k < group.Count; ++k)
             {
-                PdfLayer layer = (PdfLayer)group[k];
+                var layer = (PdfLayer)group[k];
                 if (layer.Title == null)
+                {
                     ar.Add(layer.Ref);
+                }
             }
             if (ar.Size == 0)
+            {
                 return;
+            }
+
             OcgRadioGroup.Add(ar);
         }
 
@@ -1694,7 +1577,7 @@ namespace iTextSharp.text.pdf
         /// <returns>a PdfIndirectObject</returns>
         public PdfIndirectObject AddToBody(PdfObject objecta)
         {
-            PdfIndirectObject iobj = Body.Add(objecta);
+            var iobj = Body.Add(objecta);
             return iobj;
         }
 
@@ -1707,7 +1590,7 @@ namespace iTextSharp.text.pdf
         /// <returns>a PdfIndirectObject</returns>
         public PdfIndirectObject AddToBody(PdfObject objecta, bool inObjStm)
         {
-            PdfIndirectObject iobj = Body.Add(objecta, inObjStm);
+            var iobj = Body.Add(objecta, inObjStm);
             return iobj;
         }
 
@@ -1720,7 +1603,7 @@ namespace iTextSharp.text.pdf
         /// <returns>a PdfIndirectObject</returns>
         public PdfIndirectObject AddToBody(PdfObject objecta, PdfIndirectReference refa)
         {
-            PdfIndirectObject iobj = Body.Add(objecta, refa);
+            var iobj = Body.Add(objecta, refa);
             return iobj;
         }
 
@@ -1734,7 +1617,7 @@ namespace iTextSharp.text.pdf
         /// <returns>a PdfIndirectObject</returns>
         public PdfIndirectObject AddToBody(PdfObject objecta, PdfIndirectReference refa, bool inObjStm)
         {
-            PdfIndirectObject iobj = Body.Add(objecta, refa, inObjStm);
+            var iobj = Body.Add(objecta, refa, inObjStm);
             return iobj;
         }
 
@@ -1747,7 +1630,7 @@ namespace iTextSharp.text.pdf
         /// <returns>a PdfIndirectObject</returns>
         public PdfIndirectObject AddToBody(PdfObject objecta, int refNumber)
         {
-            PdfIndirectObject iobj = Body.Add(objecta, refNumber);
+            var iobj = Body.Add(objecta, refNumber);
             return iobj;
         }
 
@@ -1761,7 +1644,7 @@ namespace iTextSharp.text.pdf
         /// <returns>a PdfIndirectObject</returns>
         public PdfIndirectObject AddToBody(PdfObject objecta, int refNumber, bool inObjStm)
         {
-            PdfIndirectObject iobj = Body.Add(objecta, refNumber, inObjStm);
+            var iobj = Body.Add(objecta, refNumber, inObjStm);
             return iobj;
         }
 
@@ -1801,23 +1684,26 @@ namespace iTextSharp.text.pdf
             if (open)
             {
                 if ((currentPageNumber - 1) != PageReferences.Count)
+                {
                     throw new Exception("The page " + PageReferences.Count +
                     " was requested but the document has only " + (currentPageNumber - 1) + " pages.");
+                }
+
                 Pdf.Close();
                 AddSharedObjectsToBody();
                 // add the root to the body
-                PdfIndirectReference rootRef = Root.WritePageTree();
+                var rootRef = Root.WritePageTree();
                 // make the catalog-object and add it to the body
-                PdfDictionary catalog = GetCatalog(rootRef);
+                var catalog = GetCatalog(rootRef);
                 // [C9] if there is XMP data to add: add it
                 if (xmpMetadata != null)
                 {
-                    PdfStream xmp = new PdfStream(xmpMetadata);
+                    var xmp = new PdfStream(xmpMetadata);
                     xmp.Put(PdfName.TYPE, PdfName.Metadata);
                     xmp.Put(PdfName.Subtype, PdfName.Xml);
                     if (Crypto != null && !Crypto.IsMetadataEncrypted())
                     {
-                        PdfArray ar = new PdfArray();
+                        var ar = new PdfArray();
                         ar.Add(PdfName.Crypt);
                         xmp.Put(PdfName.Filter, ar);
                     }
@@ -1838,9 +1724,9 @@ namespace iTextSharp.text.pdf
                 WriteOutlines(catalog, false);
 
                 // add the Catalog to the body
-                PdfIndirectObject indirectCatalog = AddToBody(catalog, false);
+                var indirectCatalog = AddToBody(catalog, false);
                 // add the info-object to the body
-                PdfIndirectObject infoObj = AddToBody(Info, false);
+                var infoObj = AddToBody(Info, false);
 
                 // [F1] encryption
                 PdfIndirectReference encryption = null;
@@ -1848,12 +1734,14 @@ namespace iTextSharp.text.pdf
                 Body.FlushObjStm();
                 if (Crypto != null)
                 {
-                    PdfIndirectObject encryptionObject = AddToBody(Crypto.GetEncryptionDictionary(), false);
+                    var encryptionObject = AddToBody(Crypto.GetEncryptionDictionary(), false);
                     encryption = encryptionObject.IndirectReference;
                     fileId = Crypto.FileId;
                 }
                 else
+                {
                     fileId = PdfEncryption.CreateInfoId(PdfEncryption.CreateDocumentId());
+                }
 
                 // write the cross-reference table of the body
                 Body.WriteCrossReferenceTable(base.Os, indirectCatalog.IndirectReference,
@@ -1863,7 +1751,7 @@ namespace iTextSharp.text.pdf
                 // [F2] full compression
                 if (fullCompression)
                 {
-                    byte[] tmp = GetIsoBytes("startxref\n");
+                    var tmp = GetIsoBytes("startxref\n");
                     base.Os.Write(tmp, 0, tmp.Length);
                     tmp = GetIsoBytes(Body.Offset.ToString());
                     base.Os.Write(tmp, 0, tmp.Length);
@@ -1872,7 +1760,7 @@ namespace iTextSharp.text.pdf
                 }
                 else
                 {
-                    PdfTrailer trailer = new PdfTrailer(Body.Size,
+                    var trailer = new PdfTrailer(Body.Size,
                     Body.Offset,
                     indirectCatalog.IndirectReference,
                     infoObj.IndirectReference,
@@ -1927,7 +1815,10 @@ namespace iTextSharp.text.pdf
         {
             CurrentPdfReaderInstance = (PdfReaderInstance)ImportedPages[reader];
             if (CurrentPdfReaderInstance == null)
+            {
                 return;
+            }
+
             CurrentPdfReaderInstance.WriteAllPages();
             CurrentPdfReaderInstance = null;
             ImportedPages.Remove(reader);
@@ -1955,7 +1846,7 @@ namespace iTextSharp.text.pdf
         /// <returns>the template representing the imported page</returns>
         public virtual PdfImportedPage GetImportedPage(PdfReader reader, int pageNumber)
         {
-            PdfReaderInstance inst = (PdfReaderInstance)ImportedPages[reader];
+            var inst = (PdfReaderInstance)ImportedPages[reader];
             if (inst == null)
             {
                 inst = reader.GetPdfReaderInstance(this);
@@ -1977,7 +1868,10 @@ namespace iTextSharp.text.pdf
         {
             --page;
             if (page < 0)
+            {
                 throw new ArgumentOutOfRangeException("The page numbers start at 1.");
+            }
+
             PdfIndirectReference refa;
             if (page < PageReferences.Count)
             {
@@ -1990,9 +1884,12 @@ namespace iTextSharp.text.pdf
             }
             else
             {
-                int empty = page - PageReferences.Count;
-                for (int k = 0; k < empty; ++k)
+                var empty = page - PageReferences.Count;
+                for (var k = 0; k < empty; ++k)
+                {
                     PageReferences.Add(null);
+                }
+
                 refa = Body.PdfIndirectReference;
                 PageReferences.Add(refa);
             }
@@ -2061,11 +1958,11 @@ namespace iTextSharp.text.pdf
             Body = new PdfBody(this);
             if (_pdfxConformance.IsPdfX32002())
             {
-                PdfDictionary sec = new PdfDictionary();
+                var sec = new PdfDictionary();
                 sec.Put(PdfName.Gamma, new PdfArray(new[] { 2.2f, 2.2f, 2.2f }));
                 sec.Put(PdfName.Matrix, new PdfArray(new[] { 0.4124f, 0.2126f, 0.0193f, 0.3576f, 0.7152f, 0.1192f, 0.1805f, 0.0722f, 0.9505f }));
                 sec.Put(PdfName.Whitepoint, new PdfArray(new[] { 0.9505f, 1f, 1.089f }));
-                PdfArray arr = new PdfArray(PdfName.Calrgb);
+                var arr = new PdfArray(PdfName.Calrgb);
                 arr.Add(sec);
                 SetDefaultColorspace(PdfName.Defaultrgb, AddToBody(arr).IndirectReference);
             }
@@ -2080,13 +1977,19 @@ namespace iTextSharp.text.pdf
         /// <param name="tp">the template to release</param>
         public void ReleaseTemplate(PdfTemplate tp)
         {
-            PdfIndirectReference refi = tp.IndirectReference;
-            object[] objs = (object[])FormXObjects[refi];
+            var refi = tp.IndirectReference;
+            var objs = (object[])FormXObjects[refi];
             if (objs == null || objs[1] == null)
+            {
                 return;
-            PdfTemplate template = (PdfTemplate)objs[1];
+            }
+
+            var template = (PdfTemplate)objs[1];
             if (template.IndirectReference is PrIndirectReference)
+            {
                 return;
+            }
+
             if (template.Type == PdfTemplate.TYPE_TEMPLATE)
             {
                 AddToBody(template.GetFormXObject(compressionLevel), template.IndirectReference);
@@ -2169,7 +2072,10 @@ namespace iTextSharp.text.pdf
         public void SetDefaultColorspace(PdfName key, PdfObject cs)
         {
             if (cs == null || cs.IsNull())
+            {
                 defaultColorspace.Remove(key);
+            }
+
             defaultColorspace.Put(key, cs);
         }
 
@@ -2190,7 +2096,10 @@ namespace iTextSharp.text.pdf
         public void SetEncryption(byte[] userPassword, byte[] ownerPassword, int permissions, int encryptionType)
         {
             if (Pdf.IsOpen())
+            {
                 throw new DocumentException("Encryption can only be added before opening the document.");
+            }
+
             Crypto = new PdfEncryption();
             Crypto.SetCryptoMode(encryptionType, 0);
             Crypto.SetupAllKeys(userPassword, ownerPassword, permissions);
@@ -2212,11 +2121,14 @@ namespace iTextSharp.text.pdf
         public void SetEncryption(X509Certificate[] certs, int[] permissions, int encryptionType)
         {
             if (Pdf.IsOpen())
+            {
                 throw new DocumentException("Encryption can only be added before opening the document.");
+            }
+
             Crypto = new PdfEncryption();
             if (certs != null)
             {
-                for (int i = 0; i < certs.Length; i++)
+                for (var i = 0; i < certs.Length; i++)
                 {
                     Crypto.AddRecipient(certs[i], permissions[i]);
                 }
@@ -2332,16 +2244,28 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public void SetOutputIntents(string outputConditionIdentifier, string outputCondition, string registryName, string info, IccProfile colorProfile)
         {
-            PdfDictionary outa = ExtraCatalog; //force the creation
+            var outa = ExtraCatalog; //force the creation
             outa = new PdfDictionary(PdfName.Outputintent);
             if (outputCondition != null)
+            {
                 outa.Put(PdfName.Outputcondition, new PdfString(outputCondition, PdfObject.TEXT_UNICODE));
+            }
+
             if (outputConditionIdentifier != null)
+            {
                 outa.Put(PdfName.Outputconditionidentifier, new PdfString(outputConditionIdentifier, PdfObject.TEXT_UNICODE));
+            }
+
             if (registryName != null)
+            {
                 outa.Put(PdfName.Registryname, new PdfString(registryName, PdfObject.TEXT_UNICODE));
+            }
+
             if (info != null)
+            {
                 outa.Put(PdfName.Info, new PdfString(info, PdfObject.TEXT_UNICODE));
+            }
+
             if (colorProfile != null)
             {
                 PdfStream stream = new PdfIccBased(colorProfile, compressionLevel);
@@ -2380,7 +2304,7 @@ namespace iTextSharp.text.pdf
         /// <param name="destOutputProfile">a value</param>
         public void SetOutputIntents(string outputConditionIdentifier, string outputCondition, string registryName, string info, byte[] destOutputProfile)
         {
-            IccProfile colorProfile = (destOutputProfile == null) ? null : IccProfile.GetInstance(destOutputProfile);
+            var colorProfile = (destOutputProfile == null) ? null : IccProfile.GetInstance(destOutputProfile);
             SetOutputIntents(outputConditionIdentifier, outputCondition, registryName, info, colorProfile);
         }
 
@@ -2395,20 +2319,32 @@ namespace iTextSharp.text.pdf
         /// <returns> true  if the output intent dictionary exists,  false </returns>
         public bool SetOutputIntents(PdfReader reader, bool checkExistence)
         {
-            PdfDictionary catalog = reader.Catalog;
-            PdfArray outs = catalog.GetAsArray(PdfName.Outputintents);
+            var catalog = reader.Catalog;
+            var outs = catalog.GetAsArray(PdfName.Outputintents);
             if (outs == null)
+            {
                 return false;
-            ArrayList arr = outs.ArrayList;
+            }
+
+            var arr = outs.ArrayList;
             if (outs.Size == 0)
+            {
                 return false;
-            PdfDictionary outa = outs.GetAsDict(0);
-            PdfObject obj = PdfReader.GetPdfObject(outa.Get(PdfName.S));
+            }
+
+            var outa = outs.GetAsDict(0);
+            var obj = PdfReader.GetPdfObject(outa.Get(PdfName.S));
             if (obj == null || !PdfName.GtsPdfx.Equals(obj))
+            {
                 return false;
+            }
+
             if (checkExistence)
+            {
                 return true;
-            PrStream stream = (PrStream)PdfReader.GetPdfObject(outa.Get(PdfName.Destoutputprofile));
+            }
+
+            var stream = (PrStream)PdfReader.GetPdfObject(outa.Get(PdfName.Destoutputprofile));
             byte[] destProfile = null;
             if (stream != null)
             {
@@ -2438,7 +2374,10 @@ namespace iTextSharp.text.pdf
         public virtual void SetPageAction(PdfName actionType, PdfAction action)
         {
             if (!actionType.Equals(PageOpen) && !actionType.Equals(PageClose))
+            {
                 throw new PdfException("Invalid page additional action type: " + actionType);
+            }
+
             Pdf.SetPageAction(actionType, action);
         }
 
@@ -2459,7 +2398,10 @@ namespace iTextSharp.text.pdf
         public void SetTagged()
         {
             if (open)
+            {
                 throw new ArgumentException("Tagging must be set before opening the document.");
+            }
+
             Tagged = true;
         }
 
@@ -2489,7 +2431,7 @@ namespace iTextSharp.text.pdf
             }
             else if (_rgbTransparencyBlending)
             {
-                PdfDictionary pp = new PdfDictionary();
+                var pp = new PdfDictionary();
                 pp.Put(PdfName.TYPE, PdfName.Group);
                 pp.Put(PdfName.S, PdfName.Transparency);
                 pp.Put(PdfName.Cs, PdfName.Devicergb);
@@ -2514,13 +2456,18 @@ namespace iTextSharp.text.pdf
                 PdfXConformanceImp.CheckPdfxConformance(this, PdfXConformanceImp.PDFXKEY_IMAGE, pdfImage);
                 if (fixedRef is PrIndirectReference)
                 {
-                    PrIndirectReference r2 = (PrIndirectReference)fixedRef;
+                    var r2 = (PrIndirectReference)fixedRef;
                     fixedRef = new PdfIndirectReference(0, GetNewObjectNumber(r2.Reader, r2.Number, r2.Generation));
                 }
                 if (fixedRef == null)
+                {
                     fixedRef = AddToBody(pdfImage).IndirectReference;
+                }
                 else
+                {
                     AddToBody(pdfImage, fixedRef);
+                }
+
                 ImageDictionary.Put(pdfImage.Name, fixedRef);
                 return fixedRef;
             }
@@ -2540,8 +2487,8 @@ namespace iTextSharp.text.pdf
         /// <returns>the  PdfName  for this template</returns>
         internal PdfName AddDirectTemplateSimple(PdfTemplate template, PdfName forcedName)
         {
-            PdfIndirectReference refa = template.IndirectReference;
-            object[] obj = (object[])FormXObjects[refa];
+            var refa = template.IndirectReference;
+            var obj = (object[])FormXObjects[refa];
             PdfName name = null;
             if (obj == null)
             {
@@ -2551,12 +2498,15 @@ namespace iTextSharp.text.pdf
                     ++FormXObjectsCounter;
                 }
                 else
+                {
                     name = forcedName;
+                }
+
                 if (template.Type == PdfTemplate.TYPE_IMPORTED)
                 {
                     // If we got here from PdfCopy we'll have to fill importedPages
-                    PdfImportedPage ip = (PdfImportedPage)template;
-                    PdfReader r = ip.PdfReaderInstance.Reader;
+                    var ip = (PdfImportedPage)template;
+                    var r = ip.PdfReaderInstance.Reader;
                     if (!ImportedPages.ContainsKey(r))
                     {
                         ImportedPages[r] = ip.PdfReaderInstance;
@@ -2566,7 +2516,10 @@ namespace iTextSharp.text.pdf
                 FormXObjects[refa] = new object[] { name, template };
             }
             else
+            {
                 name = (PdfName)obj[0];
+            }
+
             return name;
         }
 
@@ -2586,12 +2539,18 @@ namespace iTextSharp.text.pdf
         {
             foreach (string name in dest.Keys)
             {
-                object[] obj = (object[])dest[name];
-                PdfDestination destination = (PdfDestination)obj[2];
+                var obj = (object[])dest[name];
+                var destination = (PdfDestination)obj[2];
                 if (destination == null)
+                {
                     throw new Exception("The name '" + name + "' has no local destination.");
+                }
+
                 if (obj[1] == null)
+                {
                     obj[1] = PdfIndirectReference;
+                }
+
                 AddToBody(destination, (PdfIndirectReference)obj[1]);
             }
         }
@@ -2609,7 +2568,7 @@ namespace iTextSharp.text.pdf
             {
                 return new FontDetails(new PdfName("F" + (FontNumber++)), ((DocumentFont)bf).IndirectReference, bf);
             }
-            FontDetails ret = (FontDetails)DocumentFonts[bf];
+            var ret = (FontDetails)DocumentFonts[bf];
             if (ret == null)
             {
                 PdfXConformanceImp.CheckPdfxConformance(this, PdfXConformanceImp.PDFXKEY_FONT, bf);
@@ -2627,7 +2586,7 @@ namespace iTextSharp.text.pdf
         /// <returns>an  Object[]  where position 0 is a  PdfName </returns>
         internal ColorDetails AddSimple(PdfSpotColor spc)
         {
-            ColorDetails ret = (ColorDetails)DocumentColors[spc];
+            var ret = (ColorDetails)DocumentColors[spc];
             if (ret == null)
             {
                 ret = new ColorDetails(GetColorspaceName(), Body.PdfIndirectReference, spc);
@@ -2651,7 +2610,7 @@ namespace iTextSharp.text.pdf
 
         internal PdfName AddSimplePattern(PdfPatternPainter painter)
         {
-            PdfName name = (PdfName)DocumentPatterns[painter];
+            var name = (PdfName)DocumentPatterns[painter];
             if (name == null)
             {
                 name = new PdfName("P" + PatternNumber);
@@ -2663,46 +2622,52 @@ namespace iTextSharp.text.pdf
 
         internal ColorDetails AddSimplePatternColorspace(BaseColor color)
         {
-            int type = ExtendedColor.GetType(color);
+            var type = ExtendedColor.GetType(color);
             if (type == ExtendedColor.TYPE_PATTERN || type == ExtendedColor.TYPE_SHADING)
+            {
                 throw new Exception("An uncolored tile pattern can not have another pattern or shading as color.");
+            }
+
             switch (type)
             {
                 case ExtendedColor.TYPE_RGB:
                     if (PatternColorspaceRgb == null)
                     {
                         PatternColorspaceRgb = new ColorDetails(GetColorspaceName(), Body.PdfIndirectReference, null);
-                        PdfArray array = new PdfArray(PdfName.Pattern);
+                        var array = new PdfArray(PdfName.Pattern);
                         array.Add(PdfName.Devicergb);
                         AddToBody(array, PatternColorspaceRgb.IndirectReference);
                     }
                     return PatternColorspaceRgb;
+
                 case ExtendedColor.TYPE_CMYK:
                     if (PatternColorspaceCmyk == null)
                     {
                         PatternColorspaceCmyk = new ColorDetails(GetColorspaceName(), Body.PdfIndirectReference, null);
-                        PdfArray array = new PdfArray(PdfName.Pattern);
+                        var array = new PdfArray(PdfName.Pattern);
                         array.Add(PdfName.Devicecmyk);
                         AddToBody(array, PatternColorspaceCmyk.IndirectReference);
                     }
                     return PatternColorspaceCmyk;
+
                 case ExtendedColor.TYPE_GRAY:
                     if (PatternColorspaceGray == null)
                     {
                         PatternColorspaceGray = new ColorDetails(GetColorspaceName(), Body.PdfIndirectReference, null);
-                        PdfArray array = new PdfArray(PdfName.Pattern);
+                        var array = new PdfArray(PdfName.Pattern);
                         array.Add(PdfName.Devicegray);
                         AddToBody(array, PatternColorspaceGray.IndirectReference);
                     }
                     return PatternColorspaceGray;
+
                 case ExtendedColor.TYPE_SEPARATION:
                     {
-                        ColorDetails details = AddSimple(((SpotColor)color).PdfSpotColor);
-                        ColorDetails patternDetails = (ColorDetails)DocumentSpotPatterns[details];
+                        var details = AddSimple(((SpotColor)color).PdfSpotColor);
+                        var patternDetails = (ColorDetails)DocumentSpotPatterns[details];
                         if (patternDetails == null)
                         {
                             patternDetails = new ColorDetails(GetColorspaceName(), Body.PdfIndirectReference, null);
-                            PdfArray array = new PdfArray(PdfName.Pattern);
+                            var array = new PdfArray(PdfName.Pattern);
                             array.Add(details.IndirectReference);
                             AddToBody(array, patternDetails.IndirectReference);
                             DocumentSpotPatterns[details] = patternDetails;
@@ -2722,7 +2687,10 @@ namespace iTextSharp.text.pdf
             if (!DocumentProperties.ContainsKey(prop))
             {
                 if (prop is IPdfOcg)
+                {
                     PdfXConformanceImp.CheckPdfxConformance(this, PdfXConformanceImp.PDFXKEY_LAYER, null);
+                }
+
                 DocumentProperties[prop] = new PdfObject[] { new PdfName("Pr" + (DocumentProperties.Count + 1)), refi };
             }
             return (PdfObject[])DocumentProperties[prop];
@@ -2759,7 +2727,9 @@ namespace iTextSharp.text.pdf
             foreach (FontDetails ft in DocumentFonts.Values)
             {
                 if (fonts.Get(ft.FontName) != null)
+                {
                     ft.Subset = false;
+                }
             }
         }
 
@@ -2804,7 +2774,7 @@ namespace iTextSharp.text.pdf
             PdfXConformanceImp.CheckPdfxConformance(this, PdfXConformanceImp.PDFXKEY_LAYER, null);
             if (layer is PdfLayer)
             {
-                PdfLayer la = (PdfLayer)layer;
+                var la = (PdfLayer)layer;
                 if (la.Title == null)
                 {
                     if (!DocumentOcg.ContainsKey(layer))
@@ -2819,7 +2789,9 @@ namespace iTextSharp.text.pdf
                 }
             }
             else
+            {
                 throw new ArgumentException("Only PdfLayer is accepted.");
+            }
         }
 
         /// <summary>
@@ -2845,7 +2817,11 @@ namespace iTextSharp.text.pdf
         /// <param name="content">a byte array that may already been added to the writer inside a stream object.</param>
         protected internal PdfIndirectReference GetReferenceJbig2Globals(byte[] content)
         {
-            if (content == null) return null;
+            if (content == null)
+            {
+                return null;
+            }
+
             foreach (PdfStream str in Jbig2Globals.Keys)
             {
                 if (Org.BouncyCastle.Utilities.Arrays.AreEqual(content, str.GetBytes()))
@@ -2853,7 +2829,7 @@ namespace iTextSharp.text.pdf
                     return (PdfIndirectReference)Jbig2Globals[str];
                 }
             }
-            PdfStream stream = new PdfStream(content);
+            var stream = new PdfStream(content);
             PdfIndirectObject refi;
             try
             {
@@ -2873,10 +2849,13 @@ namespace iTextSharp.text.pdf
         protected internal void WriteOutlines(PdfDictionary catalog, bool namedAsNames)
         {
             if (NewBookmarks == null || NewBookmarks.Count == 0)
+            {
                 return;
-            PdfDictionary top = new PdfDictionary();
-            PdfIndirectReference topRef = PdfIndirectReference;
-            object[] kids = SimpleBookmark.IterateOutlines(this, topRef, NewBookmarks, namedAsNames);
+            }
+
+            var top = new PdfDictionary();
+            var topRef = PdfIndirectReference;
+            var kids = SimpleBookmark.IterateOutlines(this, topRef, NewBookmarks, namedAsNames);
             top.Put(PdfName.First, (PdfIndirectReference)kids[0]);
             top.Put(PdfName.Last, (PdfIndirectReference)kids[1]);
             top.Put(PdfName.Count, new PdfNumber((int)kids[2]));
@@ -2901,9 +2880,12 @@ namespace iTextSharp.text.pdf
             // add the form XObjects
             foreach (object[] objs in FormXObjects.Values)
             {
-                PdfTemplate template = (PdfTemplate)objs[1];
+                var template = (PdfTemplate)objs[1];
                 if (template != null && template.IndirectReference is PrIndirectReference)
+                {
                     continue;
+                }
+
                 if (template != null && template.Type == PdfTemplate.TYPE_TEMPLATE)
                 {
                     AddToBody(template.GetFormXObject(compressionLevel), template.IndirectReference);
@@ -2939,19 +2921,19 @@ namespace iTextSharp.text.pdf
             // add the extgstate
             foreach (DictionaryEntry entry in DocumentExtGState)
             {
-                PdfDictionary gstate = (PdfDictionary)entry.Key;
-                PdfObject[] obj = (PdfObject[])entry.Value;
+                var gstate = (PdfDictionary)entry.Key;
+                var obj = (PdfObject[])entry.Value;
                 AddToBody(gstate, (PdfIndirectReference)obj[1]);
             }
 
             // add the properties
             foreach (DictionaryEntry entry in DocumentProperties)
             {
-                object prop = entry.Key;
-                PdfObject[] obj = (PdfObject[])entry.Value;
+                var prop = entry.Key;
+                var obj = (PdfObject[])entry.Value;
                 if (prop is PdfLayerMembership)
                 {
-                    PdfLayerMembership layer = (PdfLayerMembership)prop;
+                    var layer = (PdfLayerMembership)prop;
                     AddToBody(layer.PdfObject, layer.Ref);
                 }
                 else if ((prop is PdfDictionary) && !(prop is PdfLayer))
@@ -2968,7 +2950,10 @@ namespace iTextSharp.text.pdf
         protected void FillOcProperties(bool erase)
         {
             if (VOcProperties == null)
+            {
                 VOcProperties = new PdfOcProperties();
+            }
+
             if (erase)
             {
                 VOcProperties.Remove(PdfName.Ocgs);
@@ -2976,7 +2961,7 @@ namespace iTextSharp.text.pdf
             }
             if (VOcProperties.Get(PdfName.Ocgs) == null)
             {
-                PdfArray gr = new PdfArray();
+                var gr = new PdfArray();
                 foreach (PdfLayer layer in DocumentOcg.Keys)
                 {
                     gr.Add(layer.Ref);
@@ -2984,34 +2969,50 @@ namespace iTextSharp.text.pdf
                 VOcProperties.Put(PdfName.Ocgs, gr);
             }
             if (VOcProperties.Get(PdfName.D) != null)
-                return;
-            ArrayList docOrder = new ArrayList(DocumentOcGorder);
-            for (ListIterator it = new ListIterator(docOrder); it.HasNext();)
             {
-                PdfLayer layer = (PdfLayer)it.Next();
-                if (layer.Parent != null)
-                    it.Remove();
+                return;
             }
-            PdfArray order = new PdfArray();
+
+            var docOrder = new ArrayList(DocumentOcGorder);
+            for (var it = new ListIterator(docOrder); it.HasNext();)
+            {
+                var layer = (PdfLayer)it.Next();
+                if (layer.Parent != null)
+                {
+                    it.Remove();
+                }
+            }
+            var order = new PdfArray();
             foreach (PdfLayer layer in docOrder)
             {
                 getOcgOrder(order, layer);
             }
-            PdfDictionary d = new PdfDictionary();
+            var d = new PdfDictionary();
             VOcProperties.Put(PdfName.D, d);
             d.Put(PdfName.Order, order);
-            PdfArray grx = new PdfArray();
+            var grx = new PdfArray();
             foreach (PdfLayer layer in DocumentOcg.Keys)
             {
                 if (!layer.On)
+                {
                     grx.Add(layer.Ref);
+                }
             }
             if (grx.Size > 0)
+            {
                 d.Put(PdfName.OFF, grx);
+            }
+
             if (OcgRadioGroup != null && OcgRadioGroup.Size > 0)
+            {
                 d.Put(PdfName.Rbgroups, OcgRadioGroup);
+            }
+
             if (OcgLocked != null && OcgLocked.Size > 0)
+            {
                 d.Put(PdfName.Locked, OcgLocked);
+            }
+
             addAsEvent(PdfName.View, PdfName.Zoom);
             addAsEvent(PdfName.View, PdfName.View);
             addAsEvent(PdfName.Print, PdfName.Print);
@@ -3027,10 +3028,13 @@ namespace iTextSharp.text.pdf
             {
                 StructureTreeRoot.BuildTree();
                 catalog.Put(PdfName.Structtreeroot, structureTreeRoot.Reference);
-                PdfDictionary mi = new PdfDictionary();
+                var mi = new PdfDictionary();
                 mi.Put(PdfName.Marked, PdfBoolean.Pdftrue);
                 if (_userProperties)
+                {
                     mi.Put(PdfName.Userproperties, PdfBoolean.Pdftrue);
+                }
+
                 catalog.Put(PdfName.Markinfo, mi);
             }
             // [F13] OCG
@@ -3044,51 +3048,73 @@ namespace iTextSharp.text.pdf
 
         private static string getNameString(PdfDictionary dic, PdfName key)
         {
-            PdfObject obj = PdfReader.GetPdfObject(dic.Get(key));
+            var obj = PdfReader.GetPdfObject(dic.Get(key));
             if (obj == null || !obj.IsString())
+            {
                 return null;
+            }
+
             return ((PdfString)obj).ToUnicodeString();
         }
 
         private static void getOcgOrder(PdfArray order, PdfLayer layer)
         {
             if (!layer.OnPanel)
+            {
                 return;
+            }
+
             if (layer.Title == null)
+            {
                 order.Add(layer.Ref);
-            ArrayList children = layer.Children;
+            }
+
+            var children = layer.Children;
             if (children == null)
+            {
                 return;
-            PdfArray kids = new PdfArray();
+            }
+
+            var kids = new PdfArray();
             if (layer.Title != null)
+            {
                 kids.Add(new PdfString(layer.Title, PdfObject.TEXT_UNICODE));
-            for (int k = 0; k < children.Count; ++k)
+            }
+
+            for (var k = 0; k < children.Count; ++k)
             {
                 getOcgOrder(kids, (PdfLayer)children[k]);
             }
             if (kids.Size > 0)
+            {
                 order.Add(kids);
+            }
         }
 
         private void addAsEvent(PdfName eventa, PdfName category)
         {
-            PdfArray arr = new PdfArray();
+            var arr = new PdfArray();
             foreach (PdfLayer layer in DocumentOcg.Keys)
             {
-                PdfDictionary usage = (PdfDictionary)layer.Get(PdfName.Usage);
+                var usage = (PdfDictionary)layer.Get(PdfName.Usage);
                 if (usage != null && usage.Get(category) != null)
+                {
                     arr.Add(layer.Ref);
+                }
             }
             if (arr.Size == 0)
+            {
                 return;
-            PdfDictionary d = (PdfDictionary)VOcProperties.Get(PdfName.D);
-            PdfArray arras = (PdfArray)d.Get(PdfName.As);
+            }
+
+            var d = (PdfDictionary)VOcProperties.Get(PdfName.D);
+            var arras = (PdfArray)d.Get(PdfName.As);
             if (arras == null)
             {
                 arras = new PdfArray();
                 d.Put(PdfName.As, arras);
             }
-            PdfDictionary asa = new PdfDictionary();
+            var asa = new PdfDictionary();
             asa.Put(PdfName.Event, eventa);
             asa.Put(PdfName.Category, new PdfArray(category));
             asa.Put(PdfName.Ocgs, arr);
@@ -3110,10 +3136,10 @@ namespace iTextSharp.text.pdf
         /// <returns>an XmpMetadata byte array</returns>
         private byte[] createXmpMetadataBytes()
         {
-            MemoryStream baos = new MemoryStream();
+            var baos = new MemoryStream();
             try
             {
-                XmpWriter xmp = new XmpWriter(baos, Pdf.Info, _pdfxConformance.PdfxConformance);
+                var xmp = new XmpWriter(baos, Pdf.Info, _pdfxConformance.PdfxConformance);
                 xmp.Close();
             }
             catch (IOException)
@@ -3134,7 +3160,6 @@ namespace iTextSharp.text.pdf
         /// </summary>
         public class PdfBody
         {
-
             /// <summary>
             /// inner classes
             /// </summary>
@@ -3187,43 +3212,22 @@ namespace iTextSharp.text.pdf
             {
                 get
                 {
-                    int n = _refnum++;
+                    var n = _refnum++;
                     _xrefs[new PdfCrossReference(n, 0, GENERATION_MAX)] = null;
                     return n;
                 }
             }
 
-            internal int Offset
-            {
-                get
-                {
-                    return _position;
-                }
-            }
+            internal int Offset => _position;
 
-            internal PdfIndirectReference PdfIndirectReference
-            {
-                get
-                {
-                    return new PdfIndirectReference(0, IndirectReferenceNumber);
-                }
-            }
+            internal PdfIndirectReference PdfIndirectReference => new PdfIndirectReference(0, IndirectReferenceNumber);
 
             internal int Refnum
             {
-                set
-                {
-                    _refnum = value;
-                }
+                set => _refnum = value;
             }
 
-            internal int Size
-            {
-                get
-                {
-                    return Math.Max(((PdfCrossReference)_xrefs.GetMaxKey()).Refnum + 1, _refnum);
-                }
-            }
+            internal int Size => Math.Max(((PdfCrossReference)_xrefs.GetMaxKey()).Refnum + 1, _refnum);
 
             internal PdfIndirectObject Add(PdfObject objecta)
             {
@@ -3281,16 +3285,16 @@ namespace iTextSharp.text.pdf
             {
                 if (inObjStm && objecta.CanBeInObjStm() && _writer.FullCompression)
                 {
-                    PdfCrossReference pxref = addToObjStm(objecta, refNumber);
-                    PdfIndirectObject indirect = new PdfIndirectObject(refNumber, objecta, _writer);
+                    var pxref = addToObjStm(objecta, refNumber);
+                    var indirect = new PdfIndirectObject(refNumber, objecta, _writer);
                     _xrefs.Remove(pxref);
                     _xrefs[pxref] = null;
                     return indirect;
                 }
                 else
                 {
-                    PdfIndirectObject indirect = new PdfIndirectObject(refNumber, objecta, _writer);
-                    PdfCrossReference pxref = new PdfCrossReference(refNumber, _position);
+                    var indirect = new PdfIndirectObject(refNumber, objecta, _writer);
+                    var pxref = new PdfCrossReference(refNumber, _position);
                     _xrefs.Remove(pxref);
                     _xrefs[pxref] = null;
                     indirect.WriteTo(_writer.Os);
@@ -3302,10 +3306,13 @@ namespace iTextSharp.text.pdf
             internal void FlushObjStm()
             {
                 if (_numObj == 0)
+                {
                     return;
-                int first = _index.Size;
+                }
+
+                var first = _index.Size;
                 _index.Append(_streamObjects);
-                PdfStream stream = new PdfStream(_index.ToByteArray());
+                var stream = new PdfStream(_index.ToByteArray());
                 stream.FlateCompress(_writer.CompressionLevel);
                 stream.Put(PdfName.TYPE, PdfName.Objstm);
                 stream.Put(PdfName.N, new PdfNumber(_numObj));
@@ -3318,20 +3325,22 @@ namespace iTextSharp.text.pdf
 
             internal void WriteCrossReferenceTable(Stream os, PdfIndirectReference root, PdfIndirectReference info, PdfIndirectReference encryption, PdfObject fileId, int prevxref)
             {
-                int refNumber = 0;
+                var refNumber = 0;
                 if (_writer.FullCompression)
                 {
                     FlushObjStm();
                     refNumber = IndirectReferenceNumber;
                     _xrefs[new PdfCrossReference(refNumber, _position)] = null;
                 }
-                int first = ((PdfCrossReference)_xrefs.GetMinKey()).Refnum;
-                int len = 0;
-                ArrayList sections = new ArrayList();
+                var first = ((PdfCrossReference)_xrefs.GetMinKey()).Refnum;
+                var len = 0;
+                var sections = new ArrayList();
                 foreach (PdfCrossReference entry in _xrefs.Keys)
                 {
                     if (first + len == entry.Refnum)
+                    {
                         ++len;
+                    }
                     else
                     {
                         sections.Add(first);
@@ -3344,21 +3353,24 @@ namespace iTextSharp.text.pdf
                 sections.Add(len);
                 if (_writer.FullCompression)
                 {
-                    int mid = 4;
-                    uint mask = 0xff000000;
+                    var mid = 4;
+                    var mask = 0xff000000;
                     for (; mid > 1; --mid)
                     {
                         if ((mask & _position) != 0)
+                        {
                             break;
+                        }
+
                         mask >>= 8;
                     }
-                    ByteBuffer buf = new ByteBuffer();
+                    var buf = new ByteBuffer();
 
                     foreach (PdfCrossReference entry in _xrefs.Keys)
                     {
                         entry.ToPdf(mid, buf);
                     }
-                    PdfStream xr = new PdfStream(buf.ToByteArray());
+                    var xr = new PdfStream(buf.ToByteArray());
                     buf = null;
                     xr.FlateCompress(_writer.CompressionLevel);
                     xr.Put(PdfName.Size, new PdfNumber(Size));
@@ -3368,30 +3380,42 @@ namespace iTextSharp.text.pdf
                         xr.Put(PdfName.Info, info);
                     }
                     if (encryption != null)
+                    {
                         xr.Put(PdfName.Encrypt, encryption);
+                    }
+
                     if (fileId != null)
+                    {
                         xr.Put(PdfName.Id, fileId);
+                    }
+
                     xr.Put(PdfName.W, new PdfArray(new[] { 1, mid, 2 }));
                     xr.Put(PdfName.TYPE, PdfName.Xref);
-                    PdfArray idx = new PdfArray();
-                    for (int k = 0; k < sections.Count; ++k)
+                    var idx = new PdfArray();
+                    for (var k = 0; k < sections.Count; ++k)
+                    {
                         idx.Add(new PdfNumber((int)sections[k]));
+                    }
+
                     xr.Put(PdfName.Index, idx);
                     if (prevxref > 0)
+                    {
                         xr.Put(PdfName.Prev, new PdfNumber(prevxref));
-                    PdfEncryption enc = _writer.Crypto;
+                    }
+
+                    var enc = _writer.Crypto;
                     _writer.Crypto = null;
-                    PdfIndirectObject indirect = new PdfIndirectObject(refNumber, xr, _writer);
+                    var indirect = new PdfIndirectObject(refNumber, xr, _writer);
                     indirect.WriteTo(_writer.Os);
                     _writer.Crypto = enc;
                 }
                 else
                 {
-                    byte[] tmp = GetIsoBytes("xref\n");
+                    var tmp = GetIsoBytes("xref\n");
                     os.Write(tmp, 0, tmp.Length);
                     IEnumerator i = _xrefs.Keys;
                     i.MoveNext();
-                    for (int k = 0; k < sections.Count; k += 2)
+                    for (var k = 0; k < sections.Count; k += 2)
                     {
                         first = (int)sections[k];
                         len = (int)sections[k + 1];
@@ -3419,7 +3443,10 @@ namespace iTextSharp.text.pdf
             private PdfCrossReference addToObjStm(PdfObject obj, int nObj)
             {
                 if (_numObj >= Objsinstream)
+                {
                     FlushObjStm();
+                }
+
                 if (_index == null)
                 {
                     _index = new ByteBuffer();
@@ -3427,9 +3454,9 @@ namespace iTextSharp.text.pdf
                     _currentObjNum = IndirectReferenceNumber;
                     _numObj = 0;
                 }
-                int p = _streamObjects.Size;
-                int idx = _numObj++;
-                PdfEncryption enc = _writer.Crypto;
+                var p = _streamObjects.Size;
+                var idx = _numObj++;
+                var enc = _writer.Crypto;
                 _writer.Crypto = null;
                 obj.ToPdf(_writer, _streamObjects);
                 _writer.Crypto = enc;
@@ -3440,7 +3467,6 @@ namespace iTextSharp.text.pdf
 
             internal class PdfCrossReference : IComparable
             {
-
                 /// <summary>
                 /// generation of the object.
                 /// </summary>
@@ -3455,6 +3481,7 @@ namespace iTextSharp.text.pdf
                 /// membervariables
                 /// </summary>
                 private readonly int _type;
+
                 /// <summary>
                 /// constructors
                 /// </summary>
@@ -3499,7 +3526,7 @@ namespace iTextSharp.text.pdf
 
                 public int CompareTo(object o)
                 {
-                    PdfCrossReference other = (PdfCrossReference)o;
+                    var other = (PdfCrossReference)o;
                     return (Refnum < other.Refnum ? -1 : (Refnum == other.Refnum ? 0 : 1));
                 }
 
@@ -3510,11 +3537,13 @@ namespace iTextSharp.text.pdf
                 {
                     if (obj is PdfCrossReference)
                     {
-                        PdfCrossReference other = (PdfCrossReference)obj;
+                        var other = (PdfCrossReference)obj;
                         return (Refnum == other.Refnum);
                     }
                     else
+                    {
                         return false;
+                    }
                 }
 
                 public override int GetHashCode()
@@ -3524,9 +3553,9 @@ namespace iTextSharp.text.pdf
 
                 public void ToPdf(Stream os)
                 {
-                    string s1 = _offset.ToString().PadLeft(10, '0');
-                    string s2 = _generation.ToString().PadLeft(5, '0');
-                    ByteBuffer buf = new ByteBuffer(40);
+                    var s1 = _offset.ToString().PadLeft(10, '0');
+                    var s2 = _generation.ToString().PadLeft(5, '0');
+                    var buf = new ByteBuffer(40);
                     if (_generation == GENERATION_MAX)
                     {
                         buf.Append(s1).Append(' ').Append(s2).Append(" f \n");
@@ -3548,7 +3577,10 @@ namespace iTextSharp.text.pdf
                 {
                     os.WriteByte((byte)_type);
                     while (--midSize >= 0)
+                    {
                         os.WriteByte((byte)((_offset >> (8 * midSize)) & 0xff));
+                    }
+
                     os.WriteByte((byte)((_generation >> 8) & 0xff));
                     os.WriteByte((byte)(_generation & 0xff));
                 }
@@ -3564,7 +3596,6 @@ namespace iTextSharp.text.pdf
 
         internal class PdfTrailer : PdfDictionary
         {
-
             /// <summary>
             /// membervariables
             /// </summary>
@@ -3596,11 +3627,19 @@ namespace iTextSharp.text.pdf
                     Put(PdfName.Info, info);
                 }
                 if (encryption != null)
+                {
                     Put(PdfName.Encrypt, encryption);
+                }
+
                 if (fileId != null)
+                {
                     Put(PdfName.Id, fileId);
+                }
+
                 if (prevxref > 0)
+                {
                     Put(PdfName.Prev, new PdfNumber(prevxref));
+                }
             }
 
             /// <summary>
@@ -3611,7 +3650,7 @@ namespace iTextSharp.text.pdf
             /// <param name="os"></param>
             public override void ToPdf(PdfWriter writer, Stream os)
             {
-                byte[] tmp = GetIsoBytes("trailer\n");
+                var tmp = GetIsoBytes("trailer\n");
                 os.Write(tmp, 0, tmp.Length);
                 base.ToPdf(null, os);
                 tmp = GetIsoBytes("\nstartxref\n");

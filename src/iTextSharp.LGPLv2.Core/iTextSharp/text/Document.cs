@@ -290,7 +290,7 @@ namespace iTextSharp.text
             {
                 throw new DocumentException("The document is not open yet; you can only add Meta information.");
             }
-            bool success = false;
+            var success = false;
             var number = element as ChapterAutoNumber;
             if (number != null)
             {
@@ -303,9 +303,11 @@ namespace iTextSharp.text
             var largeElement = element as ILargeElement;
             if (largeElement != null)
             {
-                ILargeElement e = largeElement;
+                var e = largeElement;
                 if (!e.ElementComplete)
+                {
                     e.FlushContent();
+                }
             }
             return success;
         }
