@@ -12,6 +12,15 @@ build:
   project: iTextSharp.LGPLv2.Core.sln
   verbosity: minimal
 
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: "{version}"
+  package_version: "{version}"
+  assembly_version: "{version}"
+  file_version: "{version}"
+  informational_version: "{version}"
+
 artifacts:
   - path: '**\iTextSharp.LGPLv2.Core.*.nupkg'
 deploy:
